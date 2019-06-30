@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Paranormal Trivia</title>
+    <meta name="description" content="A paranormal trivia game.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/styles/normalize.css">
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/spooky.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/scripts/trvia.js" async defer></script>
+</head>
+<style>
+    #ghostContainer {
+        transition: 1s ease-in-out;
+    }
+    
+    #triviaContainer {
+        transition: 1s ease-in-out;
+        width: 800px;
+        height: 400px;
+        box-sizing: border-box;
+        text-align: center;
+        display: inline-block;
+    }
+    
+    #triviaContainer img {
+        transition: 1s ease-in-out;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.2;
+    }
+    
+    .shrink {
+        opacity: 0;
+        transition: 1.2s ease-in-out;
+    }
+    
+    .hidden {
+        display: none!important;
+    }
+</style>
+
+<body>
+
+    <div id="main">
+        <div class="row" style="display:block;">
+            <h1 style="text-align:center;">Paranormal Trivia</h1>
+            <p id="introText" style="text-align:center;">How much do you know about the unknown? Test your knowledge of the supernatural.</p>
+            <a class="button1" id="startButton">Begin</a>
+        </div>
+        <div id="triviaContainer" class="shrink hidden">
+            <div id="row-centered">
+                <div id="one-column">
+                    <div id="display"></div>
+                </div>
+                <img src="assets/images/spooky_background.JPG" class="shrink hidden" id="triviaContainerImage">
+            </div>
+        </div>
+
+        <div id="ghostContainer">
+            <div id="spooky">
+                <div id="body">
+                    <div id="eyes"></div>
+                    <div id="mouth"></div>
+                    <div id="feet">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <div id="shadow"></div>
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        var clockRunning = false;
+        var intervalId;
+        var time;
+        $("#startButton").click(function() {
+            $(this).addClass("shrink");
+            $("#ghostContainer").addClass("shrink");
+            $("#introText").addClass("shrink");
+
+            setTimeout(function() {
+                $("#introText").addClass("hidden");
+                $("#startButton").addClass("hidden");
+                $("#ghostContainer").addClass("hidden");
+                $("#triviaContainer").removeClass("hidden");
+                $("#triviaContainerImage").removeClass("hidden");
+            }, 1000);
+            setTimeout(function() {
+                $("#triviaContainer").removeClass("shrink");
+                $("#triviaContainerImage").removeClass("shrink");
+                start();
+            }, 1100);
+
+        });
+
+        function countDown() {
+            time--;
+            $("#display").html(time);
+            if (time <= 0) {
+                alert("out of time!");
+                stop();
+                reset();
+            }
+        }
+
+        function start() {
+
+            if (!clockRunning) {
+                time = 3;
+                clearInterval(intervalId);
+                intervalId = setInterval(countDown, 1000);
+                clockRunning = true;
+            }
+
+        }
+
+        function stop() {
+            if (clockRunning) {
+                clearInterval(intervalId);
+                clockRunning = false;
+            }
+        }
+
+        function reset() {
+            clearInterval(intervalId);
+            time = 3;
+            $("#display").html(time);
+        }
+    </script>
+</body>
+
+</html>
