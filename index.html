@@ -9,137 +9,161 @@
     <meta name="description" content="A paranormal trivia game.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/styles/normalize.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="assets/styles/spooky.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/scripts/trvia.js" async defer></script>
+    <script src='http://use.edgefonts.net/butcherman.js'></script>
 </head>
-<style>
-    #ghostContainer {
-        transition: 1s ease-in-out;
-    }
-    
-    #triviaContainer {
-        transition: 1s ease-in-out;
-        width: 800px;
-        height: 400px;
-        box-sizing: border-box;
-        text-align: center;
-        display: inline-block;
-    }
-    
-    #triviaContainer img {
-        transition: 1s ease-in-out;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.2;
-    }
-    
-    .shrink {
-        opacity: 0;
-        transition: 1.2s ease-in-out;
-    }
-    
-    .hidden {
-        display: none!important;
-    }
-</style>
 
 <body>
-
     <div id="main">
+
         <div class="row" style="display:block;">
+            <div class="one-column">
             <h1 style="text-align:center;">Paranormal Trivia</h1>
             <p id="introText" style="text-align:center;">How much do you know about the unknown? Test your knowledge of the supernatural.</p>
+            <div id="timer" class="shrink hidden"></div>
             <a class="button1" id="startButton">Begin</a>
+            <br>
         </div>
-        <div id="triviaContainer" class="shrink hidden">
-            <div id="row-centered">
-                <div id="one-column">
-                    <div id="display"></div>
-                </div>
-                <img src="assets/images/spooky_background.JPG" class="shrink hidden" id="triviaContainerImage">
-            </div>
         </div>
 
-        <div id="ghostContainer">
-            <div id="spooky">
-                <div id="body">
-                    <div id="eyes"></div>
-                    <div id="mouth"></div>
-                    <div id="feet">
-                        <div></div>
-                        <div></div>
-                        <div></div>
+        <div id="triviaContainer" class="shrink hidden">
+            <div class="row">
+                <div class="one-column" id="#triviaQuestions">
+                </div>
+                <div class="one-column" id="#endColumn">
+                    <div id="loser" class="shrink hidden" style="margin-top:-50px;"><h2>YOU LOSE</h2></div>
+                    <div id="ghostContainerEnd" class="shrink hidden">
+                            <div id="spooky">
+                                <div id="body">
+                                    <div id="eyes"></div>
+                                    <div id="mouth"></div>
+                                    <div id="feet">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                <div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div id="resetButton"></div>
+            </div>
+            <img src="assets/images/spooky_background.JPG" class="shrink hidden" id="triviaContainerImage">
+        </div>
+    </div>
+    <div id="row-centered">
+            <div id="ghostContainer">
+                <div id="spooky">
+                    <div id="body">
+                        <div id="eyes"></div>
+                        <div id="mouth"></div>
+                        <div id="feet">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div>
                 </div>
+                <div id="shadow"></div>
             </div>
-            <div id="shadow"></div>
         </div>
+    <audio volume="0.1" id="themeSong">
+            <source src="assets/X - Files Theme Full (Illuminati Song).mp3">
+        </audio>
 
-
-    </div>
 
     <script type="text/javascript">
         var clockRunning = false;
         var intervalId;
         var time;
+
+        var questions = ["first question", "second question"];
+
+        var answers = {
+            firstAnswer: ["answer 1", "answer 2", "answer 3"];
+            secondAnswer: ["answer 1", "answer 2", "answer 3"];
+        };
+
+    
+
         $("#startButton").click(function() {
+            // $("#themeSong")[0].volume = 0.2;
+            // $("#themeSong")[0].play();
             $(this).addClass("shrink");
+            $("#ghostContainerEnd").addClass("shrink");
             $("#ghostContainer").addClass("shrink");
             $("#introText").addClass("shrink");
-
+            $("#loser").addClass("shrink");
             setTimeout(function() {
                 $("#introText").addClass("hidden");
                 $("#startButton").addClass("hidden");
                 $("#ghostContainer").addClass("hidden");
+                $("#ghostContainerEnd").addClass("hidden");
+                $("#loser").addClass("hidden");
                 $("#triviaContainer").removeClass("hidden");
+                $("#timer").removeClass("hidden");
                 $("#triviaContainerImage").removeClass("hidden");
             }, 1000);
             setTimeout(function() {
                 $("#triviaContainer").removeClass("shrink");
+                $("#timer").removeClass("shrink");
                 $("#triviaContainerImage").removeClass("shrink");
-                start();
+                reset();
             }, 1100);
-
         });
 
         function countDown() {
             time--;
-            $("#display").html(time);
+            $("#timer").html(time);
             if (time <= 0) {
-                alert("out of time!");
-                stop();
-                reset();
+                gameOver();
+                // reset();
             }
         }
 
         function start() {
-
+            $("#triviaContainer img").addClass("opacityChange");
             if (!clockRunning) {
                 time = 3;
                 clearInterval(intervalId);
                 intervalId = setInterval(countDown, 1000);
                 clockRunning = true;
             }
-
         }
 
-        function stop() {
+        function gameOver() {
             if (clockRunning) {
                 clearInterval(intervalId);
                 clockRunning = false;
+                $("#timer").addClass("shrink");
+                setTimeout(function() {
+                    $("#timer").addClass("hidden");
+                    $("#loser").removeClass("hidden");
+                    $("#ghostContainerEnd").removeClass("hidden").css("background", "none");
+                    $("#startButton").removeClass("hidden");
+            }, 1000);
+            setTimeout(function() {
+                $("#loser").removeClass("shrink");
+                $("#loser > h2").addClass("grow");
+                $("#ghostContainerEnd").removeClass("shrink"); 
+                $("#startButton").insertAfter("#resetButton").text("Start Over").removeClass("shrink");
+                }, 1500);
             }
         }
 
         function reset() {
-            clearInterval(intervalId);
-            time = 3;
-            $("#display").html(time);
+            start();
+            $("#triviaContainer img").removeClass("opacityChange");
+            setTimeout(function() {
+                $("#triviaContainer img").addClass("opacityChange");
+            }, 10);
         }
+
     </script>
 </body>
 

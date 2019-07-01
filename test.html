@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<body>
+    
+<div id="questions">
+    <button id="startButton">click me</button>
+    <br>
+    <br>
+    <button id="nextButton">click me</button>
+
+</div>
+<br>
+<div id="questionDiv"></div>
+<br>
+<div id="answersDiv">
+</div>
+
+
+<script type="text/javascript">
+
+var random;
+
+let questionList = [];
+
+let quiz = [{
+    q : {
+        question: "what is 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q: {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q : {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q : {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q : {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q : {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q : {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q : {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q: {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+{
+q : {
+        question: "what isdfsd 2+2",
+        possibleAnswers: ["3", "32", "4", "324234"],
+        answer: "4"
+    }
+},
+
+];
+
+function getRndInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+$("#startButton").click(function(){  
+x = true;
+do{ 
+  random = getRndInt(10);
+if (questionList.indexOf(quiz[random]) == -1 && questionList.length < quiz.length){
+        questionList.push(quiz[random]);
+        
+        console.log(questionList);
+        x = false;
+        console.log(questionList.length);
+        console.log(quiz.length);
+
+        $("#questionDiv").text(quiz[random].q.question);
+        for (i = 0; i < quiz[random].q.possibleAnswers.length; i++){
+            console.log(quiz[random].q.possibleAnswers[i]);
+            $("#answersDiv").append("<div>" + quiz[random].q.possibleAnswers[i] + "</div><br><br>");
+        }
+        break;
+    }
+    else if (questionList.length == quiz.length){
+        console.log("hey, that's enough");
+        break;
+    }
+    else {
+        console.log("this shouldnt' log");
+    }
+}
+while (x = true);
+    });
+
+</script>
+</body>
+</html>

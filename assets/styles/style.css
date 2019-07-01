@@ -12,6 +12,7 @@ h1 {
     font-size: 32px;
     letter-spacing: 0.1em;
     font-weight: 600;
+    text-transform: uppercase;
 }
 
 h2 {
