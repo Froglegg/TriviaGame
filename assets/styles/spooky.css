@@ -6,13 +6,13 @@ body {
 }
 
 p {
-    font-size:18px;
-color: #93b2ff;
+    font-size: 18px;
+    color: #93b2ff;
 }
 
 h1 {
     color: #93b2ff;
-    font-size:64px;
+    font-size: 64px;
     font-weight: 300;
     text-shadow: 2px 2px 8px #FF0000;
     font-family: "butcherman";
@@ -20,14 +20,27 @@ h1 {
 
 h2 {
     font-family: "butcherman";
-    font-weight:400;
+    font-weight: 400;
     font-size: 32px;
     color: #ffa600;
     transition: all 2s;
-    display:inline-block;
+    display: inline-block;
 }
- 
-#ghostContainer, #ghostContainerEnd {
+
+#questionDiv p {
+    font-weight: 500;
+    font-size: 1.2em;
+    color: #ff8800;
+}
+
+#lossesDiv p {
+    font-weight: 500;
+    font-size: 1.2em;
+    color: #ff8800;
+}
+
+#ghostContainer,
+#ghostContainerEnd {
     transition: 1s ease-in-out;
     width: 400px;
     height: 400px;
@@ -41,12 +54,14 @@ h2 {
 #timer {
     font-family: Tahoma;
     font-size: 32px;
-    font-weight:500;
+    font-weight: 500;
     color: #93b2ff;
-    animation: colorchange 32s; /* animation-name followed by duration in seconds*/
-       /* you could also use milliseconds (ms) or something like 2.5s */
-    -webkit-animation: colorchange 32s; /* Chrome and Safari */
-  }
+    /* animation: colorchange 32s;
+    /* animation-name followed by duration in seconds*/
+    /* you could also use milliseconds (ms) or something like 2.5s */
+    /* -webkit-animation: colorchange 32s;
+    Chrome and Safari */
+}
 
 #triviaContainer {
     transition: 1s ease-in-out;
@@ -55,8 +70,7 @@ h2 {
     box-sizing: border-box;
     text-align: center;
     display: inline-block;
-    background-color: rgba(66, 79, 111, 0.3);
-
+    /* background-color: rgba(66, 79, 111, 0.3); */
 }
 
 #triviaContainer img {
@@ -65,22 +79,33 @@ h2 {
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     opacity: 0.1;
     z-index: -1;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 #triviaQuestions {
-    width:50%;
-    height:400px;
-    padding:10px;
-    background-color: rgba(66, 79, 111, 0.3);
+    width: 50%;
+    height: 500px;
+    padding: 10px;
+    background-color: rgba(66, 79, 111, 0.5);
 }
 
 .opacityChange {
-    animation: opacityChange 30s; /* animation-name followed by duration in seconds*/
-   /* you could also use milliseconds (ms) or something like 2.5s */
--webkit-animation: opacityChange 30s; /* Chrome and Safari */
+    animation: opacityChange 30s;
+    /* animation-name followed by duration in seconds*/
+    /* you could also use milliseconds (ms) or something like 2.5s */
+    -webkit-animation: opacityChange 30s;
+    /* Chrome and Safari */
+}
+
+.colorChange {
+    animation: colorChange 32s;
+    -webkit-animation: colorChange 32s;
 }
 
 .no-background {
@@ -97,43 +122,85 @@ h2 {
 }
 
 .grow {
-    transform:scale(2.5);
+    transform: scale(2.5);
 }
 
-@keyframes opacityChange
-{
-0%   {opacity: .1;}
-25%  {opacity: .2;}
-50%  {opacity: .4;}
-75%  {opacity: .2;}
-100% {opacity: .1;}
+@keyframes opacityChange {
+    0% {
+        opacity: .1;
+    }
+    25% {
+        opacity: .3;
+    }
+    50% {
+        opacity: .5;
+    }
+    75% {
+        opacity: .3;
+    }
+    100% {
+        opacity: .1;
+    }
 }
 
-@-webkit-keyframes opacityChange /* Safari and Chrome - necessary duplicate */
+@-webkit-keyframes opacityChange
+/* Safari and Chrome - necessary duplicate */
+
 {
-0%   {opacity: .1;}
-25%  {opacity: .2;}
-50%  {opacity: .4;}
-75%  {opacity: .2;}
-100% {opacity: .1;}
-}
- 
-@keyframes colorchange
-{
-  0%   {color: #93b2ff;}
-  25%  {color: #ac80ff;}
-  50%  {color: #c156ff;}
-  75%  {color: #ff3589;}
-  100% {color: #ff0000;}
+    0% {
+        opacity: .1;
+    }
+    25% {
+        opacity: .3;
+    }
+    50% {
+        opacity: .5;
+    }
+    75% {
+        opacity: .3;
+    }
+    100% {
+        opacity: .1;
+    }
 }
 
-@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+@keyframes colorChange {
+    0% {
+        color: #93b2ff;
+    }
+    25% {
+        color: #ac80ff;
+    }
+    50% {
+        color: #c156ff;
+    }
+    75% {
+        color: #ff3589;
+    }
+    100% {
+        color: #ff0000;
+    }
+}
+
+@-webkit-keyframes colorChange
+/* Safari and Chrome - necessary duplicate */
+
 {
-  0%   {color: #93b2ff;}
-  25%  {color: #ac80ff;}
-  50%  {color: #c156ff;}
-  75%  {color: #ff3589;}
-  100% {color: #ff0000;}
+    0% {
+        color: #93b2ff;
+    }
+    25% {
+        color: #ac80ff;
+    }
+    50% {
+        color: #c156ff;
+    }
+    75% {
+        color: #ff3589;
+    }
+    100% {
+        color: #ff0000;
+    }
 }
 
 

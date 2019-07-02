@@ -85,7 +85,7 @@ section {
 }
 
 .row {
-    margin-top: 3%;
+    /* margin-top: 3%; */
     display: flex;
     flex-wrap: wrap;
 }
@@ -95,7 +95,7 @@ section {
     display: flex;
     flex-wrap: wrap;
     margin: auto;
-    padding: 15px;
+    /* padding: 15px; */
 }
 
 .one-column {
