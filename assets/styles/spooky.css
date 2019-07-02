@@ -23,6 +23,7 @@ h2 {
     font-weight: 400;
     font-size: 32px;
     color: #ffa600;
+    text-shadow: 2px 2px 8px #FF0000;
     transition: all 2s;
     display: inline-block;
 }
